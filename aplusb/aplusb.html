@@ -1,0 +1,112 @@
+
+  <head>
+    <meta charset="utf-8">
+    <title>A + B Exercise Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+
+      .form-signin {
+        max-width: 300px;
+        padding: 19px 29px 29px;
+        margin: 0 auto 20px;
+        background-color: #fff;
+        border: 1px solid #e5e5e5;
+        -webkit-border-radius: 5px;
+           -moz-border-radius: 5px;
+                border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                box-shadow: 0 1px 2px rgba(0,0,0,.05);
+      }
+      .form-signin .form-signin-heading,
+      .form-signin .checkbox {
+        margin-bottom: 10px;
+      }
+      .form-signin input[type="text"],
+      .form-signin input[type="password"] {
+        font-size: 16px;
+        height: auto;
+        margin-bottom: 15px;
+        padding: 7px 9px;
+    }
+
+    /* make some sections printable others hidden 
+    http://stackoverflow.com/questions/468881/print-div-id-printarea-div-only/2618980#2618980
+    */
+    @media print {
+      body * {
+        visibility:hidden;
+      }
+      #section_to_print, #section_to_print * {
+        visibility:visible;
+      }
+      #section_to_print {
+        position:absolute;
+        left:0;
+        top:0;
+      }
+    }
+
+    </style>
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">A + B</a>
+          <div class="nav-collapse collapse">
+            <p class="navbar-text pull-right">
+              Logged in as <a href="#" class="navbar-link">Username</a>
+            </p>
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row-fluid">
+          <div class="span3">
+                {{! generator template is located in generator.html to show it possible to put them on a separate file }}
+                {{> generator}}
+            </div><!--/span-->
+
+            <div class="span9">
+                {{> generated_table}}
+            </div><!--/span-->
+        </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <!--p>&copy; Company 2012</p-->
+      </footer>
+
+    </div><!--/.fluid-container-->
+
+  </body>
+
+

@@ -1,0 +1,51 @@
+<template name="generator">
+
+<form class="form-signin form-horizontal">
+    <div class="control-group">
+        <label class="control-label" for="range"> Max Number (A) </label>
+        <div class="controls">
+            <!--This is the max possible number X to be generated  in X + Y = -->
+            <input id="range" type="text" class="input-block-level" placeholder="Max Number" value="{{range}}">
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="number"> B </label>
+        <div class="controls">
+            <!--This is the number Y in X + Y = -->
+            <input id="number" type="text" class="input-block-level" placeholder="Number to Add" value="{{number}}">
+        </div>
+    </div>
+
+
+    <div class="control-group">
+        <label class="control-label" for="repeat"> Repeat </label>
+        <div class="controls">
+            <!--Repeatedly generated number of random  X  in X + Y = -->
+            <input id="repeat" type="text" class="input-block-level" placeholder="How many to randomly generate" value="{{repeat}}">
+        </div>
+    </div>
+      </form>
+
+</template>
+
+
+<template name="generated_table">
+<!--Make this printable http://stackoverflow.com/questions/468881/print-div-id-printarea-div-only/2618980#2618980 -->
+<div id="section_to_print"> 
+    <ol>
+        {{#each items }}
+        <li>
+            {{> row}}
+        </li>
+        {{/each}}
+    </ol>
+</div>
+
+</template>
+
+<template name="row">
+        <h1> {{left}} + {{right}} = </h1>
+</template>
+
+
