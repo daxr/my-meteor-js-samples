@@ -17,6 +17,14 @@
         </div>
     </div>
 
+    <div class="control-group">
+        <label class="control-label" for="operation"> Operation </label>
+        <div class="controls">
+            <!--This is the ops in X (ops) Y = -->
+            <input id="operation" type="text" class="input-block-level" placeholder="Operation" value="{{operation}}">
+        </div>
+    </div>
+
 
     <div class="control-group">
         <label class="control-label" for="repeat"> Repeat </label>
@@ -34,9 +42,9 @@
 <!--Make this printable http://stackoverflow.com/questions/468881/print-div-id-printarea-div-only/2618980#2618980 -->
 <div id="section_to_print"> 
     <ol>
-        {{#each items }}
+        {{#each data.items }}
         <li>
-            {{> row}}
+            <h1> {{left}} {{data.operation}} {{right}} = </h1>
         </li>
         {{/each}}
     </ol>
@@ -44,8 +52,7 @@
 
 </template>
 
-<template name="row">
-        <h1> {{left}} + {{right}} = </h1>
-</template>
+<!--template name="row">
+</template-->
 
 
