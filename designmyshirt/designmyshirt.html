@@ -1,0 +1,43 @@
+<head>
+  <title>designmyshirt</title>
+  <script src="fabric.js"></script>
+</head>
+ 
+<body>
+  {{> panel}}
+</body>
+ 
+<template name="panel">
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a href="#" class="brand">My Shirt</a>
+      <div class="btn-group">
+        <button id="add-img-btn" class="btn"><i class="icon-plus"></i> Add image</button>
+        <button id="add-text-btn" class="btn" rel="popover"><i class="icon-comment"></i> Add text</button>
+        <button id="clear-canvas-btn" class="btn btn-danger"><i class="icon-trash"></i> Clear panel</button>
+      </div>
+      <div class="nav-form pull-right">
+        <button id="edit-text-btn" class="btn btn-info {{#unless textSelected}}hide{{/unless}}"><i class="icon-edit"></i> Edit text</button>
+        <button id="obj-remove-btn" data-toggle="tooltip" class="btn btn-danger {{#unless selectedObject}}hide{{/unless}}"><i class="icon-remove"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<div class="container">
+  <div class="panel row">
+    <div class="span12">
+      {{#constant}}
+      <canvas id="c" style="width: 568px; height: 294px; left: 0px; top: 0px; -webkit-user-select: none; cursor: default;" width="568" height="294"></canvas>
+      {{/constant}}
+    </div>
+  </div>
+</div>
+ 
+<div id="text-controls" class="hide">
+  <textarea id="text-to-add" rows="3" autofocus></textarea>
+  <button id="confirm-add-text-btn" class="btn btn-success"><i class="icon-ok"></i> Add</button>
+  <button id="cancel-add-text-btn" class="btn btn-danger">Cancel</button>
+</div>
+</template>
