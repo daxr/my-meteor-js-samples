@@ -4,6 +4,48 @@
 Tasks = new Meteor.Collection('tasks');
 Projects = new Meteor.Collection('projects');
 
+Tasks.deny({
+  insert: function(userId,doc){
+    doc.createdAt = new Date().valueOf();
+    doc.updatedAt = doc.createdAt;   
+    return false;
+  },
+  update: function(userId,doc){
+    doc.updatedAt = new Date().valueOf();
+    return false;
+  }
+});
+
+Tasks.allow({
+  insert: function(userId, doc){
+    return true;
+  },
+  update: function(userId, doc){
+    return true;  
+  }
+});
+
+Projects.deny({
+  insert: function(userId,doc){
+    doc.createdAt = new Date().valueOf();
+    doc.updatedAt = doc.createdAt;   
+    return false;
+  },
+  update: function(userId,doc){
+    doc.updatedAt = new Date().valueOf();
+    return false;
+  }
+})
+
+Projects.allow({
+  insert: function(userId, doc){
+    return true;
+  },
+  update: function(userId, doc){
+    return true;
+  }
+})
+
 if (Meteor.isClient) {
   ngMeteor.run(['$rootScope', '$state', '$stateParams', function ($rootScope, $state, $stateParams) {
       $rootScope.$state = $state;
@@ -37,11 +79,15 @@ if (Meteor.isClient) {
       }
   ]);
 
-  ngMeteor.controller('MainCtrl', ['$scope', '$collection', '$rootScope', '$ionicModal',
-    function ($scope, $collection, $rootScope, $ionicModal) {
+  ngMeteor.controller('MainCtrl', ['$scope', '$collection', '$rootScope', '$ionicModal', '$timeout',
+    function ($scope, $collection, $rootScope, $ionicModal, $timeout) {
 
-        $collection('Tasks', $rootScope);
-        $collection('Projects', $rootScope);
+        $collection('Tasks', $rootScope,{},{sort:{updatedAt:-1}});
+        $collection('Projects', $rootScope,{},{sort:{updatedAt:-1}});
+
+        $scope.toggleProjects = function() {
+          $scope.sideMenuController.toggleLeft();
+        };
 
         Deps.autorun(function() {
             $scope.safeApply(function () {
@@ -50,9 +96,6 @@ if (Meteor.isClient) {
         });
 
         $rootScope.title2 = "another title";
-
-        // No need for testing data anymore
-        $scope.tasks = [];
 
         // Create and load the Modal
         $ionicModal.fromTemplateUrl('new-task.html', function(modal) {
@@ -64,8 +107,13 @@ if (Meteor.isClient) {
 
         // Called when the form is submitted
         $scope.createTask = function(task) {
+          var activeProject = Session.get('activeProject')
+          if(!Session.get('activeProject') || !task){
+            return;
+          }
           $rootScope.Tasks.add({
-            title: task.title
+            title: task.title,
+            projectId: activeProject._id
           });
           $scope.taskModal.hide();
           task.title = "";
@@ -81,7 +129,50 @@ if (Meteor.isClient) {
           $scope.taskModal.hide();
         };
         
+        // Create and load the Modal
+        $ionicModal.fromTemplateUrl('new-project.html', function(modal) {
+          $scope.projectModal = modal;
+        }, {
+          scope: $scope,
+          animation: 'slide-in-up'
+        });
+
+        // Called when the form is submitted
+        $scope.createProject = function(project) {
+          console.log("creating new project", project)
+          if(!project){
+            return;
           }
+          $rootScope.Projects.add({
+            title: project.title,
+          });
+          Session.set('activeProject', $rootScope.Projects[0] );
+
+          $scope.projectModal.hide();
+          project.title = "";
+        };
+
+        // Open our new task modal
+        $scope.newProject = function() {
+          $scope.projectModal.show();
+        };
+
+        // Close the new project modal
+        $scope.closeNewProject = function() {
+          $scope.projectModal.hide();
+        };
+
+        // Try to create the first project, make sure to defer
+        // this by using $timeout so everything is initialized
+        // properly
+        $timeout(function() {
+          console.log("Projects", $rootScope.Projects);
+          if($rootScope.Projects.length == 0) {
+            console.log("first proj", $scope);
+            $scope.projectModal.show();
+          }
+        });
+      }
 ]);
 
   // ngMeteor.config(['$stateProvider', '$urlRouterProvider',
