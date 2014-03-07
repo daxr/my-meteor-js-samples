@@ -9,47 +9,47 @@
 <template name="home">
     <div ng-controller="MainCtrl">
       <ion-side-menus>
-        {{> centerContent}}
-        {{> leftMenu}}
+        {{> centerContent }}
+        {{> leftMenu }}
       </ion-side-menus>
-      
-      {{> newTask}}
+        {{> newTask }}
+        {{> newProject }}
     </div>
 </template>
 
 <template name="centerContent">
-        <!-- Center content -->
-        <ion-pane ion-side-menu-content>
-        <header class="bar bar-header bar-dark">
-          <button class="button button-icon" ng-click="toggleProjects()">
+  <!-- Center content -->
+  <ion-pane ion-side-menu-content>
+    <header class="bar bar-header bar-dark">
+      <button class="button button-icon" ng-click="toggleProjects()">
         <i class="icon ion-navicon"></i>
       </button>
-          <h1 class="title">Todo</h1>
-          <!-- New Task button-->
-          <button class="button button-icon" ng-click="newTask()">
-            <i class="icon ion-compose"></i>
-          </button>
-        </header>
-
-          <ion-content has-header="true">
-            <!-- our list and list items -->
-            <ion-list>
-              <ion-item ng-repeat="task in Tasks">
-                [[task.title]]
-              </ion-item>
-            </ion-list>
-          </ion-content>
-        </ion-pane>
+      <h1 class="title">[[activeProject.title]]</h1>
+      <!-- New Task button-->
+      <button class="button button-icon" ng-click="newTask()">
+        <i class="icon ion-compose"></i>
+      </button>
+    </header>
+    <ion-content has-header="true" scroll="false">
+      <ion-list>
+        <ion-item ng-repeat="task in activeProject.tasks">
+          [[task.title]]
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-pane>
 </template>
 
 <template name="leftMenu">
-        <ion-side-menu side="left">
+  <!-- Left menu -->
+  <ion-side-menu side="left">
     <header class="bar bar-header bar-dark">
       <h1 class="title">Projects</h1>
       <button class="button button-icon" ng-click="newProject()">
         <i class="icon ion-plus"></i>
       </button>
-      <ion-content has-header="true" scroll="false">
+    </header>
+    <ion-content has-header="true" scroll="false">
       <ion-list>
         <ion-item ng-repeat="project in Projects" ng-click="selectProject(project, $index)" ng-class="{active: activeProject == project}">
           [[project.title]]
@@ -57,12 +57,6 @@
       </ion-list>
     </ion-content>
   </ion-side-menu>
-    </header>
-  </ion-side-menu>
-
-      
-        
-   
 </template>
 
 <template name="newTask">
@@ -87,6 +81,38 @@
         </div>
         <div class="padding">
           <button type="submit" class="button button-block button-positive">Create Task</button>
+        </div>
+      </form>
+
+    </ion-content>
+
+  </div>
+
+    </script>
+</template>
+
+<template name="newProject">
+    <script id="new-project.html" type="text/ng-template">
+
+  <div class="modal">
+
+    <!-- Modal header bar -->
+    <header class="bar bar-header bar-secondary">
+      <h1 class="title">New Project</h1>
+      <button class="button button-clear button-positive" ng-click="closeNewProject()">Cancel</button>
+    </header>
+
+    <!-- Modal content area -->
+    <ion-content has-header="true">
+
+      <form ng-submit="createProject(project)">
+        <div class="list">
+          <label class="item item-input">
+            <input type="text" placeholder="What is your new Project?" ng-model="project.title">
+          </label>
+        </div>
+        <div class="padding">
+          <button type="submit" class="button button-block button-positive">Create Project</button>
         </div>
       </form>
 
