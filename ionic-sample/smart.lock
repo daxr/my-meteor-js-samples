@@ -1,0 +1,30 @@
+{
+  "meteor": {},
+  "dependencies": {
+    "basePackages": {
+      "ngMeteor": {
+        "git": "https://github.com/loneleeandroo/ngMeteor.git",
+        "branch": "master"
+      },
+      "angular-ui-router": {},
+      "ionic": {}
+    },
+    "packages": {
+      "ngMeteor": {
+        "git": "https://github.com/loneleeandroo/ngMeteor.git",
+        "branch": "master",
+        "commit": "3c350370ea5028168b4e907583ba6e2e33225297"
+      },
+      "angular-ui-router": {
+        "git": "https://github.com/ccll/meteor-angular-ui-router.git",
+        "tag": "v0.1.5",
+        "commit": "9449c5a0b1439bccc1227f7db062510681d2afe5"
+      },
+      "ionic": {
+        "git": "https://github.com/cramrov/meteor-ionic.git",
+        "tag": "v0.9.26",
+        "commit": "43b64bf5bceb77ec733a68cc6f5253ac69e4361c"
+      }
+    }
+  }
+}

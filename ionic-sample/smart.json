@@ -1,0 +1,9 @@
+{
+  "packages": {
+    "ngMeteor": {
+      "git": "https://github.com/loneleeandroo/ngMeteor.git"
+    },
+    "angular-ui-router": {},
+    "ionic": {}
+  }
+}
