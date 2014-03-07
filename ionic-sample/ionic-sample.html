@@ -8,6 +8,7 @@
 
 <template name="home">
     <div ng-controller="MainCtrl">
+      <ion-side-menus>
         <!-- Center content -->
         <ion-pane ion-side-menu-content>
         <header class="bar bar-header bar-dark">
@@ -27,6 +28,7 @@
             </ion-list>
           </ion-content>
         </ion-pane>
+      </ion-side-menus>
         {{> newTask}}
     </div>
 </template>
