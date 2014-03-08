@@ -4,6 +4,7 @@
       "git": "https://github.com/loneleeandroo/ngMeteor.git"
     },
     "angular-ui-router": {},
-    "ionic": {}
+    "ionic": {},
+    "angularite": {}
   }
 }

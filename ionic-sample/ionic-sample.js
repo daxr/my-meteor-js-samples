@@ -82,16 +82,21 @@ if (Meteor.isClient) {
   ngMeteor.controller('MainCtrl', ['$scope', '$collection', '$rootScope', '$ionicModal', '$timeout',
     function ($scope, $collection, $rootScope, $ionicModal, $timeout) {
 
+        // $collection('Tasks', 'Tasks', null, $rootScope,{},{sort:{updatedAt:-1}});
+        // $collection('Projects', 'Projects', null, $rootScope,{},{sort:{updatedAt:-1}});
         $collection('Tasks', $rootScope,{},{sort:{updatedAt:-1}});
         $collection('Projects', $rootScope,{},{sort:{updatedAt:-1}});
-
         $scope.toggleProjects = function() {
           $scope.sideMenuController.toggleLeft();
         };
 
         Deps.autorun(function() {
             $scope.safeApply(function () {
-                $scope.title = Session.get('my-title');
+
+              if(Session.get('activeProject')){
+                 console.log('autorun', Tasks.find({projectId: Session.get('activeProject')._id}).fetch());
+                 $scope.activeTasks = Tasks.find({projectId: Session.get('activeProject')._id}).fetch();
+              }
             });
         });
 
@@ -107,13 +112,13 @@ if (Meteor.isClient) {
 
         // Called when the form is submitted
         $scope.createTask = function(task) {
-          var activeProject = Session.get('activeProject')
+
           if(!Session.get('activeProject') || !task){
             return;
           }
           $rootScope.Tasks.add({
             title: task.title,
-            projectId: activeProject._id
+            projectId: Session.get('activeProject')._id
           });
           $scope.taskModal.hide();
           task.title = "";
@@ -203,5 +208,17 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
   Meteor.startup(function () {
     // code to run on server at startup
+    Meteor.publish("Tasks", function () {
+      return Tasks.find({});
+    });
+    // Meteor.publish("Tasks1", function () {
+    //   return Tasks.find({projectId:"g4ciJLheF7fFSJkeK"});
+    // });
+    Meteor.publish("Projects", function () {
+      return Projects.find({});
+    });
+
+
+
   });
 }

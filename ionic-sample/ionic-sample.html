@@ -21,10 +21,10 @@
   <!-- Center content -->
   <ion-pane ion-side-menu-content>
     <header class="bar bar-header bar-dark">
-      <button class="button button-icon" ng-click="toggleProjects()">
+      <button class="button button-icon" ng-click="sideMenuController.toggleLeft()">
         <i class="icon ion-navicon"></i>
       </button>
-      <h1 class="title">[[activeProject.title]]</h1>
+      <h1 class="title">[[Session.get('activeProject').title]]</h1>
       <!-- New Task button-->
       <button class="button button-icon" ng-click="newTask()">
         <i class="icon ion-compose"></i>
@@ -32,7 +32,7 @@
     </header>
     <ion-content has-header="true" scroll="false">
       <ion-list>
-        <ion-item ng-repeat="task in activeProject.tasks">
+        <ion-item ng-repeat="task in activeTasks">
           [[task.title]]
         </ion-item>
       </ion-list>
@@ -51,7 +51,7 @@
     </header>
     <ion-content has-header="true" scroll="false">
       <ion-list>
-        <ion-item ng-repeat="project in Projects" ng-click="selectProject(project, $index)" ng-class="{active: activeProject == project}">
+        <ion-item ng-repeat="project in Projects" ng-click="Session.set('activeProject', project)" ng-class="{active: Session.get('activeProject') == project}">
           [[project.title]]
         </ion-item>
       </ion-list>

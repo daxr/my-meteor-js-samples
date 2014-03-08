@@ -7,23 +7,34 @@
         "branch": "master"
       },
       "angular-ui-router": {},
-      "ionic": {}
+      "ionic": {},
+      "angularite": {}
     },
     "packages": {
       "ngMeteor": {
         "git": "https://github.com/loneleeandroo/ngMeteor.git",
         "branch": "master",
-        "commit": "3c350370ea5028168b4e907583ba6e2e33225297"
+        "commit": "f4e25e2bf047886330d3e2bb3d073effe2cc530b"
       },
       "angular-ui-router": {
         "git": "https://github.com/ccll/meteor-angular-ui-router.git",
-        "tag": "v0.1.5",
-        "commit": "9449c5a0b1439bccc1227f7db062510681d2afe5"
+        "tag": "v0.2.1",
+        "commit": "8b59e98f1069c1422ab89156994a7bf50753191d"
       },
       "ionic": {
         "git": "https://github.com/cramrov/meteor-ionic.git",
         "tag": "v0.9.26",
         "commit": "43b64bf5bceb77ec733a68cc6f5253ac69e4361c"
+      },
+      "angularite": {
+        "git": "https://github.com/ccll/meteor-angularite.git",
+        "tag": "v0.1.2",
+        "commit": "99b88aca935be75b5d31b41c10dc94480dad1821"
+      },
+      "bower": {
+        "git": "https://github.com/mquandalle/meteor-bower.git",
+        "tag": "v0.1.2",
+        "commit": "780b841593c355d1522982e50e7a59fe35d33fee"
       }
     }
   }
