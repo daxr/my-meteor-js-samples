@@ -103,7 +103,7 @@ if (Meteor.isClient) {
         $rootScope.title2 = "another title";
 
         // Create and load the Modal
-        $ionicModal.fromTemplateUrl('new-task.html', function(modal) {
+        $ionicModal.fromTemplateUrl('newTask', function(modal) {
           $scope.taskModal = modal;
         }, {
           scope: $scope,
@@ -135,7 +135,7 @@ if (Meteor.isClient) {
         };
         
         // Create and load the Modal
-        $ionicModal.fromTemplateUrl('new-project.html', function(modal) {
+        $ionicModal.fromTemplateUrl('newProject', function(modal) {
           $scope.projectModal = modal;
         }, {
           scope: $scope,
