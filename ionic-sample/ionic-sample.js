@@ -47,6 +47,9 @@ Projects.allow({
 })
 
 if (Meteor.isClient) {
+  Meteor.subscribe('Tasks');
+  Meteor.subscribe('Projects');
+
   ngMeteor.run(['$rootScope', '$state', '$stateParams', function ($rootScope, $state, $stateParams) {
       $rootScope.$state = $state;
       $rootScope.$stateParams = $stateParams;
@@ -148,10 +151,12 @@ if (Meteor.isClient) {
           if(!project){
             return;
           }
-          $rootScope.Projects.add({
+          Projects.insert({
             title: project.title,
+          }, function(err, _id){
+            Session.set('activeProject', Projects.findOne({_id:_id}));
           });
-          Session.set('activeProject', $rootScope.Projects[0] );
+          
 
           $scope.projectModal.hide();
           project.title = "";
@@ -170,13 +175,15 @@ if (Meteor.isClient) {
         // Try to create the first project, make sure to defer
         // this by using $timeout so everything is initialized
         // properly
-        $timeout(function() {
-          console.log("Projects", $rootScope.Projects);
-          if($rootScope.Projects.length == 0) {
-            console.log("first proj", $scope);
-            $scope.projectModal.show();
-          }
-        });
+        // $timeout(function() {
+        //   console.log("Projects", Projects.find().count());
+        //   if($rootScope.Projects.length == 0) {
+        //     console.log("first proj", $scope);
+        //     $scope.projectModal.show();
+        //   }else{
+        //     Session.set('activeProject', Projects.findOne({},{sort:{updatedAt:-1}}));
+        //   }
+        // });
       }
 ]);
 
@@ -211,9 +218,9 @@ if (Meteor.isServer) {
     Meteor.publish("Tasks", function () {
       return Tasks.find({});
     });
-    // Meteor.publish("Tasks1", function () {
-    //   return Tasks.find({projectId:"g4ciJLheF7fFSJkeK"});
-    // });
+    Meteor.publish("Tasks1", function () {
+      return Tasks.find({projectId:"g4ciJLheF7fFSJkeK"});
+    });
     Meteor.publish("Projects", function () {
       return Projects.find({});
     });
