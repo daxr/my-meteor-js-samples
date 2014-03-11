@@ -14,12 +14,12 @@
       "ngMeteor": {
         "git": "https://github.com/loneleeandroo/ngMeteor.git",
         "branch": "master",
-        "commit": "f4e25e2bf047886330d3e2bb3d073effe2cc530b"
+        "commit": "8c84d27d8e0f6e8d19563965e14db66144150072"
       },
       "angular-ui-router": {
         "git": "https://github.com/ccll/meteor-angular-ui-router.git",
-        "tag": "v0.2.1",
-        "commit": "8b59e98f1069c1422ab89156994a7bf50753191d"
+        "tag": "v0.2.2",
+        "commit": "5b10a69b961bc6a89a81f7a28d1bf93408a5ae4c"
       },
       "ionic": {
         "git": "https://github.com/cramrov/meteor-ionic.git",
