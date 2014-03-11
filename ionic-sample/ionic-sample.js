@@ -87,8 +87,8 @@ if (Meteor.isClient) {
 
         // $collection('Tasks', 'Tasks', null, $rootScope,{},{sort:{updatedAt:-1}});
         // $collection('Projects', 'Projects', null, $rootScope,{},{sort:{updatedAt:-1}});
-        $collection('Tasks', $rootScope,{},{sort:{updatedAt:-1}});
-        $collection('Projects', $rootScope,{},{sort:{updatedAt:-1}});
+        $collection('Tasks1', Tasks, $rootScope,{},{sort:{updatedAt:-1}});
+        $collection('Projects', Projects, $rootScope,{},{sort:{updatedAt:-1}});
         $scope.toggleProjects = function() {
           $scope.sideMenuController.toggleLeft();
         };
@@ -119,7 +119,8 @@ if (Meteor.isClient) {
           if(!Session.get('activeProject') || !task){
             return;
           }
-          $rootScope.Tasks.add({
+          //$rootScope.Tasks.add({
+          Tasks.insert({
             title: task.title,
             projectId: Session.get('activeProject')._id
           });
